@@ -1,0 +1,168 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: 1px;
+  --radius-md: 2px;
+  --radius-lg: 2px;
+  --radius-xl: 2px;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-pitch: var(--pitch);
+  --color-turf: var(--turf);
+  --color-steel: var(--steel);
+  --color-chalk: var(--chalk);
+  --color-electric: var(--electric);
+  --color-gold: var(--gold);
+  --color-navy: var(--navy);
+  --color-flare: var(--flare);
+  --color-slate: var(--slate);
+
+  --font-display: "Archivo Black", "Archivo", sans-serif;
+  --font-sub: "Archivo", sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+:root {
+  --radius: 2px;
+  --pitch: oklch(0.175 0.012 255);
+  --turf: oklch(0.215 0.012 255);
+  --steel: oklch(0.27 0.012 255);
+  --chalk: oklch(0.975 0.008 250);
+  --electric: oklch(0.76 0.2 152);
+  --gold: oklch(0.8 0.15 88);
+  --navy: oklch(0.19 0.04 255);
+  --flare: oklch(0.6 0.2 27);
+  --slate: oklch(0.65 0.02 255);
+
+  --background: var(--pitch);
+  --foreground: var(--chalk);
+  --card: var(--turf);
+  --card-foreground: var(--chalk);
+  --popover: var(--turf);
+  --popover-foreground: var(--chalk);
+  --primary: var(--electric);
+  --primary-foreground: var(--pitch);
+  --secondary: var(--steel);
+  --secondary-foreground: var(--chalk);
+  --muted: var(--turf);
+  --muted-foreground: oklch(0.72 0.015 255);
+  --accent: var(--gold);
+  --accent-foreground: var(--pitch);
+  --destructive: var(--flare);
+  --destructive-foreground: var(--chalk);
+  --border: oklch(0.975 0.008 250 / 10%);
+  --input: oklch(0.975 0.008 250 / 18%);
+  --ring: var(--electric);
+
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --hero-overlay: linear-gradient(to top, oklch(0.175 0.012 255 / 0.96) 0%, oklch(0.175 0.012 255 / 0.55) 50%, oklch(0.175 0.012 255 / 0.25) 100%);
+  --hero-glow: radial-gradient(circle at 85% 85%, oklch(0.76 0.2 152 / 0.1), transparent 55%);
+  --shadow-glow: 0 0 32px -6px oklch(0.76 0.2 152 / 0.6);
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { background: var(--pitch); overflow-x: hidden; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection { background: var(--electric); color: var(--pitch); }
+  @media (pointer: fine) { body.has-cursor, body.has-cursor a, body.has-cursor button { cursor: none; } }
+}
+
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+
+@utility font-display { font-family: var(--font-display); font-weight: 400; letter-spacing: -0.03em; line-height: 0.9; text-transform: uppercase; }
+@utility label { font-family: var(--font-sans); font-weight: 600; font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; }
+@utility mono-tag { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+@utility text-hero { font-size: clamp(48px, 12vw, 160px); }
+@utility text-h1 { font-size: clamp(44px, 9vw, 128px); }
+@utility text-h2 { font-size: clamp(36px, 5.5vw, 76px); }
+@utility text-h3 { font-size: clamp(26px, 3.2vw, 44px); }
+
+@utility btn-primary {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  background: var(--electric); color: var(--pitch); border-radius: 2px;
+  padding: 1rem 2rem; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  transition: transform 250ms var(--ease), box-shadow 250ms var(--ease);
+  &:hover { transform: scale(1.02); box-shadow: var(--shadow-glow); }
+  &:active { transform: scale(0.98); }
+}
+@utility btn-dark {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  background: var(--pitch); color: var(--chalk); border-radius: 2px;
+  padding: 1.1rem 2.2rem; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  transition: transform 250ms var(--ease), background 250ms var(--ease);
+  &:hover { background: var(--navy); }
+  &:active { transform: scale(0.98); }
+}
+@utility btn-ghost {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.6rem;
+  border: 1px solid oklch(0.975 0.008 250 / 0.5); color: var(--chalk); border-radius: 2px;
+  padding: 1rem 2rem; font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  transition: background 250ms var(--ease), color 250ms var(--ease), border-color 250ms var(--ease);
+  &:hover { background: var(--electric); color: var(--pitch); border-color: var(--electric); }
+  &:active { transform: scale(0.98); }
+}
+@utility link-u {
+  position: relative; display: inline-flex; align-items: center; gap: 0.5rem;
+  color: var(--electric); font-size: 12px; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase;
+  &::after { content: ""; position: absolute; left: 0; bottom: -4px; height: 1px; width: 100%; background: currentColor; transform: scaleX(0); transform-origin: left; transition: transform 500ms var(--ease); }
+  &:hover::after { transform: scaleX(1); }
+}
+@utility pitch-grid {
+  background-image:
+    linear-gradient(oklch(0.975 0.008 250 / 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, oklch(0.975 0.008 250 / 0.03) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+@utility hairline { height: 1px; background: oklch(0.76 0.2 152 / 0.4); }
+@utility plate { background: var(--turf); border: 1px solid var(--border); border-radius: 2px; }
+@utility field {
+  width: 100%; background: transparent; border: 0; border-bottom: 1px solid var(--input); border-radius: 0;
+  padding: 0.85rem 0; color: var(--chalk); font-size: 15px; outline: none; transition: border-color 250ms var(--ease);
+  &:focus { border-bottom-color: var(--electric); }
+  &::placeholder { color: oklch(0.72 0.015 255 / 0.6); }
+}
+
+@keyframes breathe { 0%,100% { opacity: .5; transform: scale(1); } 50% { opacity: 1; transform: scale(1.08); } }
+@keyframes marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes travel { 0% { transform: translateY(0); opacity: 0; } 20% { opacity: 1; } 100% { transform: translateY(56px); opacity: 0; } }
+@keyframes pulse-dot { 0% { box-shadow: 0 0 0 0 oklch(0.76 0.2 152 / 0.7); } 100% { box-shadow: 0 0 0 10px oklch(0.76 0.2 152 / 0); } }
+@utility animate-breathe { animation: breathe 7s ease-in-out infinite; }
+@utility animate-marquee { animation: marquee 40s linear infinite; }
+@utility animate-travel { animation: travel 2.2s var(--ease) infinite; }
+@utility animate-pulse-dot { animation: pulse-dot 1.6s ease-out infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
